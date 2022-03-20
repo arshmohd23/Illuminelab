@@ -2,6 +2,8 @@
 import './App.css';
 import Tab from './components/Tab';
 import Changetable from './components/Changetable';
+import Test from './components/Test';
+// import database from './firebase';
 
 function App() {
   const data = [{ name: 'Arshad', School: 'KV', Contact: 1021 },
@@ -12,6 +14,7 @@ function App() {
       <header className="App-header">
         {/* <Tab x={data} /> */}
         <Changetable />
+        <Test name="Arshad" heroName="Mohd" />
       </header>
     </div>
   );

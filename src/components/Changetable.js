@@ -1,4 +1,6 @@
 import Reat from "react"
+
+import firebase from './firebaseconfig'
 class Changetable extends Reat.Component {
     constructor(props) {
         super(props);
@@ -11,6 +13,7 @@ class Changetable extends Reat.Component {
 
         }
     }
+
     changetable() {
         if (this.state.Active == false) {
             this.setState({
@@ -19,6 +22,9 @@ class Changetable extends Reat.Component {
                 { Name: "Bhed", School: "CHS", Contact: 7444 }],
                 Active: true
             })
+
+
+
         }
         else {
             this.setState({
@@ -32,6 +38,31 @@ class Changetable extends Reat.Component {
 
         }
     }
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState !== this.state) {
+            this.writeUserData();
+        }
+
+    }
+    componentDidMount() {
+
+        this.getUserData();
+    }
+
+
+    writeUserData = () => {
+        firebase.database()
+            .ref("arshad/").set(this.state);
+
+    };
+    getUserData = () => {
+        let ref = firebase.database().ref("arshad/");
+        ref.on("value", snapshot => {
+            const state = snapshot.val();
+
+            this.setState(state);
+        });
+    };
     render() {
         return (
             <div className="App">
